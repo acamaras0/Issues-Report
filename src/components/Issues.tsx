@@ -10,20 +10,35 @@ const Issues = ({ issueArray, setIssueArray }: Props) => {
   console.log(issueArray);
 
   return (
-    <div className="flex flex-wrap justify-evenly">
+    // <div className="flex flex-wrap justify-evenly">
+    //   {issueArray.length > 0 ? (
+    //     issueArray.map((issue) => (
+    //       <SingleIssue
+    //         issue={issue}
+    //         issueArray={issueArray}
+    //         setIssueArray={setIssueArray}
+    //         key={issue.id}
+    //       />
+    //     ))
+    //   ) : (
+    //     <p>No existing issues.</p>
+    //   )}
+    // </div>
+    <ul className="py-1 px-10">
       {issueArray.length > 0 ? (
         issueArray.map((issue) => (
-          <SingleIssue
-            issue={issue}
-            issueArray={issueArray}
-            setIssueArray={setIssueArray}
-            key={issue.id}
-          />
+          <li key={issue.id}>
+            <SingleIssue
+              issue={issue}
+              issueArray={issueArray}
+              setIssueArray={setIssueArray}
+            />
+          </li>
         ))
       ) : (
         <p>No existing issues.</p>
       )}
-    </div>
+    </ul>
   );
 };
 

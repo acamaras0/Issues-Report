@@ -10,9 +10,8 @@ const Home = () => {
   const [location, setLocation] = useState<string>("");
   const [issueArray, setIssueArray] = useState<IssuesArray[]>([]);
   const [switchPage, setSwitchPage] = useState<boolean>(false);
-  const date: string = new Date()
-    .toISOString()
-    .slice(0, new Date().toISOString().lastIndexOf(":"));
+
+  const date: string = new Date().toISOString();
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
