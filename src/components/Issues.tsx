@@ -39,7 +39,7 @@ const Issues = ({ issueArray, setIssueArray }: Props) => {
           {children}
           {children.length > 30 ? (
             <ChevronDownIcon
-              className="bg-yellow-400 font-medium ml-2 h-3 w-3 mt-1 block"
+              className="bg-yellow-400 font-medium ml-2 h-3 w-3 mt-1 mr-2"
               aria-hidden
             />
           ) : (
@@ -100,7 +100,7 @@ const Issues = ({ issueArray, setIssueArray }: Props) => {
                       <td className="whitespace-nowrap px-2 py-4 text-zinc-600">
                         {issue.login}
                       </td>
-                      <td className="block max-w-lg whitespace-wrap px-8 py-4">
+                      <td className="max-w-lg whitespace-wrap px-8 py-4">
                         <Accordion.Root
                           type="single"
                           defaultValue="item-1"
