@@ -8,6 +8,7 @@ const Home = () => {
   const [login, setLogin] = useState<string>("");
   const [issue, setIssue] = useState<string>("");
   const [location, setLocation] = useState<string>("");
+  const [radio, setRadio] = useState<string>("");
   const [issueArray, setIssueArray] = useState<IssuesArray[]>([]);
   const [switchPage, setSwitchPage] = useState<boolean>(false);
 
@@ -24,11 +25,13 @@ const Home = () => {
           issue: issue,
           location: location,
           date: date,
+          subject: radio,
           isFixed: false,
         },
       ]);
     }
   };
+
   return (
     <>
       <Navbar setSwitch={setSwitchPage} />
@@ -37,6 +40,7 @@ const Home = () => {
           setLogin={setLogin}
           setIssue={setIssue}
           setLocation={setLocation}
+          setRadio={setRadio}
           handleAdd={handleAdd}
         />
       ) : (

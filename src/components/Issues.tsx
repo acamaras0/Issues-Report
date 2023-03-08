@@ -37,14 +37,10 @@ const Issues = ({ issueArray, setIssueArray }: Props) => {
           className="inline-flex"
         >
           {children}
-          {children.length > 30 ? (
-            <ChevronDownIcon
-              className="bg-yellow-400 font-medium ml-2 h-3 w-3 mt-1 mr-2"
-              aria-hidden
-            />
-          ) : (
-            ""
-          )}
+          <ChevronDownIcon
+            className="bg-yellow-400 font-medium ml-2 h-3 w-3 mt-1 mr-2"
+            aria-hidden
+          />
         </Accordion.Trigger>
       </Accordion.Header>
     )
@@ -107,14 +103,8 @@ const Issues = ({ issueArray, setIssueArray }: Props) => {
                           collapsible
                         >
                           <Accordion.Item value="item-1">
-                            <AccordionTrigger>
-                              {issue.issue.substring(0, 60)}
-                            </AccordionTrigger>
-                            {issue.issue.length > 30 ? (
-                              <AccordionContent>{issue.issue}</AccordionContent>
-                            ) : (
-                              ""
-                            )}
+                            <AccordionTrigger>{issue.subject}</AccordionTrigger>
+                            <AccordionContent>{issue.issue}</AccordionContent>
                           </Accordion.Item>
                         </Accordion.Root>
                       </td>
@@ -153,7 +143,7 @@ const Issues = ({ issueArray, setIssueArray }: Props) => {
                 ))}
               </table>
             ) : (
-              <p>No issues.</p>
+              <p className="text-center">No issues. ツ</p>
             )}
           </div>
         </div>
