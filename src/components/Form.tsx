@@ -45,7 +45,7 @@ const Form = ({ setLogin, setIssue, setLocation, handleAdd }: Props) => {
   return (
     <div className="flex justify-center p-6">
       <form
-        className="block max-w-sm bg-gray-50 p-6 shadow-lg"
+        className="block max-w-sm bg-gray-50 p-6 shadow-lg font-mono"
         onSubmit={(e) => {
           handleAdd(e);
           setMessage("Thank you!");
