@@ -6,6 +6,8 @@ import { FiAlertOctagon } from "react-icons/fi";
 import { CgTimelapse } from "react-icons/cg";
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
+import classNames from "classnames";
+import "./styles.css";
 
 interface Props {
   issueArray: IssuesArray[];
@@ -27,20 +29,21 @@ const Issues = ({ issueArray, setIssueArray }: Props) => {
 
   const AccordionTrigger = React.forwardRef(
     (
-      { children, ...props }: { children: string },
+      {
+        children,
+        className,
+        ...props
+      }: { children: string; className?: string },
       forwardedRef: React.Ref<HTMLButtonElement>
     ) => (
-      <Accordion.Header>
+      <Accordion.Header className="AccordionHeader">
         <Accordion.Trigger
+          className={classNames("AccordionTrigger", className)}
           {...props}
           ref={forwardedRef}
-          className="inline-flex"
         >
           {children}
-          <ChevronDownIcon
-            className="bg-yellow-400 font-medium ml-2 h-3 w-3 mt-1 mr-2"
-            aria-hidden
-          />
+          <ChevronDownIcon className="AccordionChevron" aria-hidden />
         </Accordion.Trigger>
       </Accordion.Header>
     )
@@ -48,11 +51,19 @@ const Issues = ({ issueArray, setIssueArray }: Props) => {
 
   const AccordionContent = React.forwardRef(
     (
-      { children, ...props }: { children: string },
+      {
+        children,
+        className,
+        ...props
+      }: { children: string; className?: string },
       forwardedRef: React.Ref<HTMLDivElement>
     ) => (
-      <Accordion.Content {...props} ref={forwardedRef}>
-        <div>{children}</div>
+      <Accordion.Content
+        className={classNames("AccordionContent", className)}
+        {...props}
+        ref={forwardedRef}
+      >
+        <div className="AccordionContentText">{children}</div>
       </Accordion.Content>
     )
   );
@@ -64,8 +75,8 @@ const Issues = ({ issueArray, setIssueArray }: Props) => {
           <div className="overflow-hidden">
             {issueArray.length > 0 ? (
               <table className="min-w-full text-center text-sm font-mono">
-                <thead className="text-black border-b-[0.100rem] font-medium bg-sky-100 shadow-md shadow-slate-200/60">
-                  <tr>
+                <thead className="hidden md:table-header-group md:text-black md:border-b-[0.100rem] md:font-medium md:bg-sky-100 md:shadow-md md:shadow-slate-200/60">
+                  <tr className=" bg-sky-100 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
                     <th scope="col" className="px-3 py-3 font-mono">
                       MAC
                     </th>
@@ -81,28 +92,34 @@ const Issues = ({ issueArray, setIssueArray }: Props) => {
                     <th scope="col" className="px-3 py-3 font-mono">
                       Status
                     </th>
-                    <th></th>
+                    <th scope="col" className="px-3 py-3 font-mono">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
                 {issueArray.map((issue) => (
                   <tbody
-                    className="group/item hover:bg-zinc-100  cursor-pointer"
+                    className=" hover:bg-zinc-100  cursor-pointer"
                     key={issue.id}
                   >
-                    <tr className="border-b border-slate-500/40">
+                    <tr className="border-b border-slate-500/40 flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
                       <td className="whitespace-nowrap px-2 py-4 font-semibold">
                         {issue.location}
                       </td>
                       <td className="whitespace-nowrap px-2 py-4 text-zinc-600">
                         {issue.login}
                       </td>
-                      <td className="max-w-lg whitespace-wrap px-8 py-4">
+                      <td className="whitespace-wrap px-2 py-4 flex justify-center">
                         <Accordion.Root
+                          className="AccordionRoot"
                           type="single"
                           defaultValue="item-1"
                           collapsible
                         >
-                          <Accordion.Item value="item-1">
+                          <Accordion.Item
+                            className="AccordionItem"
+                            value="item-1"
+                          >
                             <AccordionTrigger>{issue.subject}</AccordionTrigger>
                             <AccordionContent>{issue.issue}</AccordionContent>
                           </Accordion.Item>
@@ -113,28 +130,24 @@ const Issues = ({ issueArray, setIssueArray }: Props) => {
                           {issue.date}
                         </Moment>
                       </td>
-                      <td
-                        className={
-                          issue.isFixed
-                            ? "whitespace-wrap px-3 py-4 text-yellow-500 w-5 h-5"
-                            : "whitespace-wrap px-3 py-4 text-red-600 w-5 h-5"
-                        }
-                      >
-                        {issue.isFixed ? (
-                          <CgTimelapse className="text-yellow-400 text-lg ml-4 w-5 h-5" />
-                        ) : (
-                          <FiAlertOctagon className="text-red-400 text-lg ml-4  w-5 h-5" />
-                        )}
+                      <td className="whitespace-nowrap px-3 py-4 ">
+                        <div className="flex gap-x-6 justify-center items-center">
+                          {issue.isFixed ? (
+                            <CgTimelapse className="text-yellow-400 text-lg  w-7 h-7 md:w-5 md:h-5 " />
+                          ) : (
+                            <FiAlertOctagon className="text-red-500 text-lg  w-7 h-7 md:w-5 md:h-5 " />
+                          )}
+                        </div>
                       </td>
-                      <td className="whitespace-wrap px-3 py-4 ">
-                        <div className="flex gap-x-4">
+                      <td className="whitespace-wrap px-3 py-4">
+                        <div className="flex gap-x-6 justify-center items-center">
                           <BsHourglassSplit
                             onClick={() => handleStatus(issue.id)}
-                            className="text-yellow-400 text-lg group/edit invisible group-hover/item:visible"
+                            className="text-yellow-400 text-lg w-7 h-7 md:w-5 md:h-5"
                           />
                           <BsTrash3Fill
                             onClick={() => handleDelete(issue.id)}
-                            className="text-red-400 text-lg group/edit invisible group-hover/item:visible"
+                            className="text-red-500 text-lg w-7 h-7 md:w-5 md:h-5"
                           />
                         </div>
                       </td>
