@@ -46,7 +46,7 @@ const Form = ({
   ];
 
   return (
-    <div className="flex justify-center p-6">
+    <div className="flex justify-center p-6 mt-10">
       <form
         className="block max-w-md bg-gray-50 p-6 shadow-lg font-mono"
         onSubmit={(e) => {
@@ -134,9 +134,9 @@ const Form = ({
             );
           })}
         </div>
-        <div className="flex">
+        <div className="flex items-start">
           <button
-            className="bg-yellow-300 px-6 py-2.5 text-xs font-bold uppercase leading-tight text-black shadow-md transition duration-150 ease-in-out hover:bg-yellow-400 hover:shadow-lg focus:bg-zinc-700 focus:text-white focus:shadow-lg"
+            className="bg-yellow-300 px-6 py-3 items-center text-xs font-bold uppercase leading-tight text-black shadow-md transition duration-150 ease-in-out hover:bg-yellow-400 hover:shadow-lg focus:bg-zinc-700 focus:text-white focus:shadow-lg"
             type="submit"
           >
             Submit
