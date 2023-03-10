@@ -1,5 +1,4 @@
 import React from "react";
-import { IssuesArray } from "../interface/interfaces";
 import Moment from "react-moment";
 import { BsTrash3Fill, BsHourglassSplit } from "react-icons/bs";
 import { FiAlertOctagon } from "react-icons/fi";
@@ -7,14 +6,10 @@ import { CgTimelapse } from "react-icons/cg";
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import classNames from "classnames";
+import { IssuesProps } from "../interface/interfaces";
 import "./styles.css";
 
-interface Props {
-  issueArray: IssuesArray[];
-  setIssueArray: React.Dispatch<React.SetStateAction<IssuesArray[]>>;
-}
-
-const Issues = ({ issueArray, setIssueArray }: Props) => {
+const Issues = ({ issueArray, setIssueArray }: IssuesProps) => {
   const handleDelete = (id: number) => {
     setIssueArray(issueArray.filter((issue) => issue.id !== id));
   };

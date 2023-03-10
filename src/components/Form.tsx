@@ -3,14 +3,7 @@ import { CgCheckO } from "react-icons/cg";
 import { HiOutlineDesktopComputer } from "react-icons/hi";
 import { BsFillKeyboardFill } from "react-icons/bs";
 import { GiMouse } from "react-icons/gi";
-
-interface Props {
-  setLogin: (value: string) => void;
-  setIssue: (value: string) => void;
-  setLocation: (value: string) => void;
-  setRadio: (value: string) => void;
-  handleAdd: (e: React.FormEvent) => void;
-}
+import { FormProps } from "../interface/interfaces";
 
 const Form = ({
   setLogin,
@@ -18,7 +11,7 @@ const Form = ({
   setLocation,
   setRadio,
   handleAdd,
-}: Props) => {
+}: FormProps) => {
   const [message, setMessage] = useState<string>("");
   const handleChange =
     (setter: (value: string) => void) =>
