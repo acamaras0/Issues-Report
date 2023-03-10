@@ -143,11 +143,11 @@ const Issues = ({ issueArray, setIssueArray }: Props) => {
                         <div className="flex gap-x-6 justify-center items-center">
                           <BsHourglassSplit
                             onClick={() => handleStatus(issue.id)}
-                            className="text-yellow-400 text-lg w-6 h-6 md:w-5 md:h-5"
+                            className="text-yellow-400 text-lg w-6 h-6 md:w-5 md:h-5 hover:scale-110 ease-linear duration-200"
                           />
                           <BsTrash3Fill
                             onClick={() => handleDelete(issue.id)}
-                            className="text-red-500 text-lg w-6 h-6 md:w-5 md:h-5"
+                            className="text-red-500 text-lg w-6 h-6 md:w-5 md:h-5 hover:scale-110 ease-linear duration-200"
                           />
                         </div>
                       </td>
