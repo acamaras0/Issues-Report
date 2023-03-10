@@ -48,7 +48,7 @@ const Form = ({
   return (
     <div className="flex justify-center p-6">
       <form
-        className="block max-w-sm bg-gray-50 p-6 shadow-lg font-mono"
+        className="block max-w-md bg-gray-50 p-6 shadow-lg font-mono"
         onSubmit={(e) => {
           handleAdd(e);
           setMessage("Thank you!");

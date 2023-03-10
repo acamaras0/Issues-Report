@@ -6,6 +6,7 @@ export interface IssuesArray {
   subject: string;
   date: string;
   isFixed: boolean;
+  isArchieved: boolean;
 }
 
 export interface FormProps {

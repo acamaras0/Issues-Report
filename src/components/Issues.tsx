@@ -58,7 +58,9 @@ const Issues = ({ issueArray, setIssueArray }: IssuesProps) => {
         {...props}
         ref={forwardedRef}
       >
-        <div className="AccordionContentText">{children}</div>
+        <div className="AccordionContentText bg-red-100 text-black">
+          {children}
+        </div>
       </Accordion.Content>
     )
   );
@@ -71,7 +73,7 @@ const Issues = ({ issueArray, setIssueArray }: IssuesProps) => {
             {issueArray.length > 0 ? (
               <table className="min-w-full text-center text-sm font-mono">
                 <thead className="hidden md:table-header-group md:text-black md:border-b-[0.100rem] md:font-medium md:bg-sky-100 md:shadow-md md:shadow-slate-200/60">
-                  <tr className=" bg-sky-100 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                  <tr className=" bg-yellow-200 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
                     <th scope="col" className="px-3 py-3 font-mono">
                       MAC
                     </th>
@@ -93,61 +95,69 @@ const Issues = ({ issueArray, setIssueArray }: IssuesProps) => {
                   </tr>
                 </thead>
                 {issueArray.map((issue) => (
-                  <tbody
-                    className=" hover:bg-zinc-100  cursor-pointer"
-                    key={issue.id}
-                  >
-                    <tr className="border-b border-slate-500/40 flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-                      <td className="whitespace-nowrap px-2 py-4 font-semibold">
-                        {issue.location}
-                      </td>
-                      <td className="whitespace-nowrap px-2 py-4 text-zinc-600">
-                        {issue.login}
-                      </td>
-                      <td className="whitespace-wrap px-2 py-4 flex justify-center">
-                        <Accordion.Root
-                          className="AccordionRoot"
-                          type="single"
-                          defaultValue="item-1"
-                          collapsible
-                        >
-                          <Accordion.Item
-                            className="AccordionItem"
-                            value="item-1"
-                          >
-                            <AccordionTrigger>{issue.subject}</AccordionTrigger>
-                            <AccordionContent>{issue.issue}</AccordionContent>
-                          </Accordion.Item>
-                        </Accordion.Root>
-                      </td>
-                      <td className="whitespace-nowrap px-2 py-4 text-zinc-600">
-                        <Moment fromNow className="font-light">
-                          {issue.date}
-                        </Moment>
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 ">
-                        <div className="flex gap-x-6 justify-center items-center">
-                          {issue.isFixed ? (
-                            <CgTimelapse className="text-yellow-400 text-lg  w-6 h-6 md:w-5 md:h-5 " />
-                          ) : (
-                            <FiAlertOctagon className="text-red-500 text-lg  w-6 h-6 md:w-5 md:h-5 " />
-                          )}
-                        </div>
-                      </td>
-                      <td className="whitespace-wrap px-3 py-4">
-                        <div className="flex gap-x-6 justify-center items-center">
-                          <BsHourglassSplit
-                            onClick={() => handleStatus(issue.id)}
-                            className="text-yellow-400 text-lg w-6 h-6 md:w-5 md:h-5 hover:scale-110 ease-linear duration-200"
-                          />
-                          <BsTrash3Fill
-                            onClick={() => handleDelete(issue.id)}
-                            className="text-red-500 text-lg w-6 h-6 md:w-5 md:h-5 hover:scale-110 ease-linear duration-200"
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
+                  <>
+                    {!issue.isArchieved ? (
+                      <tbody
+                        className=" hover:bg-zinc-100  cursor-pointer"
+                        key={issue.id}
+                      >
+                        <tr className="border-b border-slate-500/40 flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+                          <td className="whitespace-nowrap px-4 py-4 font-semibold">
+                            {issue.location}
+                          </td>
+                          <td className="whitespace-nowrap px-4 py-4 text-zinc-600">
+                            {issue.login}
+                          </td>
+                          <td className="whitespace-wrap px-4 py-4 flex justify-center">
+                            <Accordion.Root
+                              className="AccordionRoot"
+                              type="single"
+                              defaultValue="item-1"
+                              collapsible
+                            >
+                              <Accordion.Item
+                                className="AccordionItem"
+                                value="item-1"
+                              >
+                                <AccordionTrigger>
+                                  {issue.subject}
+                                </AccordionTrigger>
+                                <AccordionContent>
+                                  {issue.issue}
+                                </AccordionContent>
+                              </Accordion.Item>
+                            </Accordion.Root>
+                          </td>
+                          <td className="whitespace-nowrap px-4 py-4 text-zinc-600">
+                            <Moment fromNow className="font-light">
+                              {issue.date}
+                            </Moment>
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-4 ">
+                            <div className="flex gap-x-6 justify-center items-center">
+                              {issue.isFixed ? (
+                                <CgTimelapse className="text-yellow-400 text-lg  w-6 h-6 md:w-5 md:h-5 " />
+                              ) : (
+                                <FiAlertOctagon className="text-red-500 text-lg  w-6 h-6 md:w-5 md:h-5 " />
+                              )}
+                            </div>
+                          </td>
+                          <td className="whitespace-wrap px-3 py-4">
+                            <div className="flex gap-x-6 justify-center items-center">
+                              <BsHourglassSplit
+                                onClick={() => handleStatus(issue.id)}
+                                className="text-yellow-400 text-lg w-6 h-6 md:w-5 md:h-5 hover:scale-110 ease-linear duration-200"
+                              />
+                              <BsTrash3Fill
+                                onClick={() => handleDelete(issue.id)}
+                                className="text-red-500 text-lg w-6 h-6 md:w-5 md:h-5 hover:scale-110 ease-linear duration-200"
+                              />
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    ) : null}
+                  </>
                 ))}
               </table>
             ) : (

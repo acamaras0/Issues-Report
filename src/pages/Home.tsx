@@ -27,11 +27,13 @@ const Home = () => {
           date: date,
           subject: radio,
           isFixed: false,
+          isArchieved: false,
         },
       ]);
     }
   };
 
+  console.log(issueArray);
   return (
     <>
       <Navbar setSwitch={setSwitchPage} />
